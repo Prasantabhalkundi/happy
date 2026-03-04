@@ -4,22 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A beautiful and vibrant Happy Holi wish for my love.">
-    <title>Happy Holi My Love!</title>
-    <!-- Modern Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Premium Digital Happy Holi Greeting.">
+    <title>Happy Holi Priyanka - Premium Greeting</title>
+    <!-- Premium Fonts: Outfit for body, Dancing Script for cursive highlights -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <!-- Confetti canvas library for Holi color splashes -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
-    <div class="glass-card">
-        <h1 class="gradient-text">Happy Holi, My Love Priyanka ❤️</h1>
-        <p class="message">May our life together be as vibrant and colorful as this beautiful festival. I love you
-            endlessly! 🎨✨</p>
-        <button id="splash-btn" class="glow-btn">Fire Colors!</button>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-circle"></div>
+        <p>Preparing Colors...</p>
     </div>
+
+    <!-- Intro Reveal Screen -->
+    <div id="intro-screen">
+        <div class="intro-content">
+            <h2 class="sub-text">A special delivery for</h2>
+            <h1 class="receiver-name">Priyanka</h1>
+            <p class="tap-hint"><i class="fa-solid fa-envelope-open-text"></i> Tap to Reveal</p>
+        </div>
+    </div>
+
+    <!-- Floating Audio Control -->
+    <button id="music-btn" class="floating-btn" aria-label="Toggle Music">
+        <i class="fa-solid fa-music"></i>
+    </button>
+
+    <!-- Main Content Background -->
+    <div class="main-container">
+
+        <!-- Premium Glass Card -->
+        <div class="glass-card" id="greeting-card">
+            <div class="card-inner">
+                <span class="badge"><i class="fa-solid fa-crown"></i> Premium Edition</span>
+
+                <h1 class="gradient-text festival-title">Happy Holi</h1>
+                <h2 class="receiver-highlight">My Love, Priyanka ❤️</h2>
+
+                <div class="separator">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+
+                <p class="message">
+                    May our life together be as vibrant and colorful as this beautiful festival. Every moment with you
+                    brings a new shade of joy to my world. I love you endlessly! 🎨✨
+                </p>
+
+                <div class="action-buttons">
+                    <button id="splash-btn" class="glow-btn main-btn">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Fire Colors!
+                    </button>
+                    <button id="share-btn" class="glow-btn outline-btn">
+                        <i class="fa-solid fa-share-nodes"></i> Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

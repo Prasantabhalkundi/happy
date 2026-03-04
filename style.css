@@ -1,38 +1,180 @@
+/* Reset & Base Setup */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
 }
 
 body {
-    background: #0f172a;
-    /* Deep modern dark mode */
+    background: #0B0E14;
+    /* Deep premium dark */
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Outfit', sans-serif;
     overflow: hidden;
-    position: relative;
     color: white;
 }
 
-/* Dynamic gradient background animation */
-body::before {
+/* --- Preloader --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0B0E14;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease;
+}
+
+.loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #FF6B6B;
+    border-radius: 50%;
+    animation: spin 1s linear infinite, colorChange 3s linear infinite;
+    margin-bottom: 20px;
+}
+
+#preloader p {
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #94a3b8;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        border-top-color: #FF6B6B;
+    }
+
+    33% {
+        border-top-color: #4D96FF;
+    }
+
+    66% {
+        border-top-color: #6BCB77;
+    }
+
+    100% {
+        border-top-color: #FF6B6B;
+    }
+}
+
+/* --- Intro Screen (Reveal Overlay) --- */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #1A1F2E 0%, #0B0E14 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    cursor: pointer;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+}
+
+.intro-content {
+    text-align: center;
+    animation: float 4s ease-in-out infinite;
+}
+
+.sub-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #cbd5e1;
+    margin-bottom: 10px;
+}
+
+.receiver-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5.5rem;
+    background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+    text-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    line-height: 1.2;
+}
+
+.tap-hint {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    animation: pulse 2s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+
+/* --- Main Container & Dynamic Background --- */
+.main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.main-container::before {
     content: '';
     position: absolute;
     top: -50%;
     left: -50%;
     right: -50%;
     bottom: -50%;
-    background: radial-gradient(circle at top right, rgba(255, 107, 107, 0.6), transparent 45%),
-        radial-gradient(circle at bottom left, rgba(77, 150, 255, 0.6), transparent 45%),
-        radial-gradient(circle at center, rgba(255, 217, 61, 0.4), transparent 50%),
-        radial-gradient(circle at top left, rgba(107, 203, 119, 0.5), transparent 45%),
-        radial-gradient(circle at bottom right, rgba(177, 156, 217, 0.6), transparent 45%);
-    z-index: 0;
-    animation: pulseBg 15s infinite alternate ease-in-out;
-    filter: blur(40px);
+    /* Super vibrant ambient light background */
+    background: radial-gradient(circle at top right, rgba(255, 107, 107, 0.7), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(77, 150, 255, 0.7), transparent 45%),
+        radial-gradient(circle at center, rgba(255, 217, 61, 0.5), transparent 50%),
+        radial-gradient(circle at top left, rgba(107, 203, 119, 0.6), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(177, 156, 217, 0.7), transparent 45%);
+    z-index: -1;
+    animation: pulseBg 12s infinite alternate ease-in-out;
+    filter: blur(60px);
 }
 
 @keyframes pulseBg {
@@ -41,7 +183,7 @@ body::before {
     }
 
     50% {
-        transform: scale(1.1) rotate(5deg);
+        transform: scale(1.15) rotate(5deg);
     }
 
     100% {
@@ -49,129 +191,241 @@ body::before {
     }
 }
 
+/* --- Premium Glass Card w/ 3D Effect --- */
 .glass-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    border-left: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 28px;
-    padding: 3.5rem 3rem;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 35px;
+    padding: 12px;
+    /* Margin for inner border */
     text-align: center;
-    max-width: 480px;
+    max-width: 580px;
     width: 90%;
-    z-index: 10;
-    box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transform: translateY(30px) scale(0.95);
+    box-shadow: 0 40px 100px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    /* Set up for 3D Tilt */
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
     opacity: 0;
-    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Hidden initially */
+    transition: opacity 1s ease;
 }
 
-@keyframes fadeUp {
-    to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
+.glass-card.visible {
+    opacity: 1;
+}
+
+/* Inner dashed border for physical card realism */
+.card-inner {
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 3.5rem 3rem;
+    transform: translateZ(60px);
+    /* Lifts elements closer to viewer in 3D space! */
+}
+
+/* Typography & Content styling inside card */
+.badge {
+    background: linear-gradient(90deg, #FFD93D, #FF922B);
+    color: #1e293b;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
+}
+
+.festival-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.8rem;
+    margin-bottom: -5px;
+    line-height: 1;
 }
 
 .gradient-text {
-    font-size: 2.7rem;
-    font-weight: 700;
-    /* Vibrant holi colors gradient */
     background: linear-gradient(135deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #FF6B6B);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientShift 6s ease infinite;
-    margin-bottom: 1.2rem;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
 }
 
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
+.receiver-highlight {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+}
 
-    50% {
-        background-position: 100% 50%;
-    }
+.separator {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+}
 
-    100% {
-        background-position: 0% 50%;
-    }
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.dot:nth-child(1) {
+    background: #FF6B6B;
+    box-shadow: 0 0 10px #FF6B6B;
+}
+
+.dot:nth-child(2) {
+    background: #FFD93D;
+    box-shadow: 0 0 10px #FFD93D;
+}
+
+.dot:nth-child(3) {
+    background: #4D96FF;
+    box-shadow: 0 0 10px #4D96FF;
 }
 
 .message {
     font-size: 1.15rem;
-    font-weight: 300;
     color: #f8fafc;
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    font-weight: 500;
+    margin-bottom: 40px;
+    line-height: 1.8;
+    font-weight: 300;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Buttons --- */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    /* responsive */
 }
 
 .glow-btn {
-    background: linear-gradient(135deg, #FF6B6B, #4D96FF, #FFD93D);
-    background-size: 200% 200%;
-    color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
-    padding: 1rem 2.5rem;
-    border: none;
+    padding: 0.9rem 2.2rem;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     letter-spacing: 0.5px;
-    box-shadow: 0 10px 20px -5px rgba(255, 107, 107, 0.5),
-        0 10px 20px -5px rgba(77, 150, 255, 0.5);
+}
+
+.main-btn {
+    background: linear-gradient(135deg, #FF6B6B, #4D96FF, #FFD93D);
+    background-size: 200% 200%;
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px -5px rgba(255, 107, 107, 0.5);
     animation: btnGradient 4s ease infinite;
 }
 
-@keyframes btnGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Subtle animated border effect for button */
-.glow-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease;
-}
-
-.glow-btn:hover::before {
-    left: 100%;
+.outline-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .glow-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px -10px rgba(255, 107, 107, 0.8),
-        0 15px 30px -10px rgba(77, 150, 255, 0.8),
-        0 15px 30px -10px rgba(255, 217, 61, 0.8);
+    transform: translateY(-4px);
+}
+
+.main-btn:hover {
+    box-shadow: 0 15px 30px -10px rgba(255, 107, 107, 0.9), 0 15px 30px -10px rgba(77, 150, 255, 0.9);
     background-size: 300% 300%;
 }
 
-.glow-btn:active {
-    transform: translateY(1px);
-    transition: transform 0.1s;
+.outline-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+}
+
+/* --- Floating Music Control --- */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 50;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.floating-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+}
+
+.floating-btn.playing {
+    animation: pulseMusic 2s infinite;
+    color: #FFD93D;
+    border-color: rgba(255, 217, 61, 0.6);
+}
+
+@keyframes pulseMusic {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 217, 61, 0.3);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 217, 61, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 217, 61, 0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .receiver-name {
+        font-size: 4rem;
+    }
+
+    .festival-title {
+        font-size: 3.8rem;
+    }
+
+    .card-inner {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .glow-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
