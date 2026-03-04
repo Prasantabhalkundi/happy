@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: #0f172a;
+    /* Deep modern dark mode */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    color: white;
+}
+
+/* Dynamic gradient background animation */
+body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: radial-gradient(circle at top right, rgba(255, 107, 107, 0.6), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(77, 150, 255, 0.6), transparent 45%),
+        radial-gradient(circle at center, rgba(255, 217, 61, 0.4), transparent 50%),
+        radial-gradient(circle at top left, rgba(107, 203, 119, 0.5), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(177, 156, 217, 0.6), transparent 45%);
+    z-index: 0;
+    animation: pulseBg 15s infinite alternate ease-in-out;
+    filter: blur(40px);
+}
+
+@keyframes pulseBg {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(-5deg);
+    }
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 28px;
+    padding: 3.5rem 3rem;
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    z-index: 10;
+    box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.gradient-text {
+    font-size: 2.7rem;
+    font-weight: 700;
+    /* Vibrant holi colors gradient */
+    background: linear-gradient(135deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #FF6B6B);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.message {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: #f8fafc;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+}
+
+.glow-btn {
+    background: linear-gradient(135deg, #FF6B6B, #4D96FF, #FFD93D);
+    background-size: 200% 200%;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 20px -5px rgba(255, 107, 107, 0.5),
+        0 10px 20px -5px rgba(77, 150, 255, 0.5);
+    animation: btnGradient 4s ease infinite;
+}
+
+@keyframes btnGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Subtle animated border effect for button */
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.glow-btn:hover::before {
+    left: 100%;
+}
+
+.glow-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -10px rgba(255, 107, 107, 0.8),
+        0 15px 30px -10px rgba(77, 150, 255, 0.8),
+        0 15px 30px -10px rgba(255, 217, 61, 0.8);
+    background-size: 300% 300%;
+}
+
+.glow-btn:active {
+    transform: translateY(1px);
+    transition: transform 0.1s;
+}
